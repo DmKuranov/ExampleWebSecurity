@@ -1,0 +1,8 @@
+Приложение-пример Spring MVC + Spring Security + JDBC.
+Предназначено для развертывания под Tomcat. Предоставляемая конфигурация по умолчанию хранит данные в in-memory экземпляре h2(теряются при перезапуске приложения).
+Для корректной работы требуется поместить актуальный spring-instrument-tomcat-X.RELEASE.jar TOMCAT_HOME/lib и указать в TOMCAT_HOME/conf/context.xml
+	<Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader"/>
+Без этой конфигурации предусмотрено закрытие контекста Spring при инициализации.
+
+
+Примечание: совместимость версий spring-instrument-tomcat с tomcat может теряться https://jira.spring.io/browse/SPR-13210
