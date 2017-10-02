@@ -1,0 +1,7 @@
+CREATE TABLE users (
+  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  login VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL
+);
+
+ALTER TABLE users ADD CONSTRAINT users_login_UQ UNIQUE(login);

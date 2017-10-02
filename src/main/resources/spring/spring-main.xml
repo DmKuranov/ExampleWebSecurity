@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:p="http://www.springframework.org/schema/p"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:task="http://www.springframework.org/schema/task"
+         xmlns:cache="http://www.springframework.org/schema/cache"
+         xsi:schemaLocation="
+         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+         ">
+
+
+    <bean id="contextConfigProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:context.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource" autowire="byName">
+        <property name="basename" value="classpath:label" />
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="fallbackToSystemLocale" value="true"/>
+    </bean>
+
+    <context:component-scan base-package="ru.dmkuranov">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <import resource="spring-data.xml"/>
+
+    <!--
+    <import resource="spring-security.xml"/>
+    -->
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+        <property name="defaultLocale" value="ru"/>
+    </bean>
+
+    <bean id="startDate" class="java.util.Date"/>
+</beans>
